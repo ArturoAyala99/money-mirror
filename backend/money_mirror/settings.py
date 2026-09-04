@@ -40,11 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third-party apps
     'rest_framework',
+    'corsheaders', # Para manejar CORS en desarrollo
     # Local apps
     'api',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # Debe ir primero para que las cabeceras CORS se procesen correctamente
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -128,7 +130,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS (para conectar con React en desarrollo)
 CORS_ALLOWED_ORIGINS = [
-    # "http://localhost:5173",   # Vite (React) en desarrollo
+    "http://localhost:5173",   # Vite (React) en desarrollo
 ]
 
 # Django REST Framework

@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+// Cliente Axios configuración
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 const apiClient = axios.create({

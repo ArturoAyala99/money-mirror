@@ -1,5 +1,7 @@
 import apiClient from './client';
 
+// Servicios de autenticación 
+
 // estandarizamos los tipos de datos
 export interface RegisterData{
     username: string;
@@ -8,7 +10,7 @@ export interface RegisterData{
 }
 
 export interface LoginData{
-    email: string;
+    username: string;
     password: string;
 }
 
@@ -22,12 +24,12 @@ export interface UserData{
 
 // funciones de autenticación
 export const register = async (data: RegisterData): Promise<UserData> => {
-    const response = await apiClient.post('/auth/register', data);
+    const response = await apiClient.post('/auth/register/', data);
     return response.data;
 };
 
 export const login = async (data: LoginData): Promise<{ access: string; refresh: string}> => {
-    const response = await apiClient.post('/auth/login', data);
+    const response = await apiClient.post('/auth/login/', data);
     if (response.data.access){
         localStorage.setItem('access_token', response.data.access);
         localStorage.setItem('refresh_token', response.data.refresh);
@@ -37,7 +39,7 @@ export const login = async (data: LoginData): Promise<{ access: string; refresh:
 };
 
 export const getMe = async (): Promise<UserData> => {
-    const response = await apiClient.get('/auth/me');
+    const response = await apiClient.get('/auth/me/');
     return response.data;
 };
 

@@ -1,13 +1,15 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import type { ReactNode } from 'react'
-import { login as apiLogin, getMe, logout as apiLogout } from '../api/auth';
-import type { UserData, LoginData } from '../api/auth';
+import { register as apiRegister, login as apiLogin, getMe, logout as apiLogout } from '../api/auth';
+import type { UserData, RegisterData, LoginData } from '../api/auth';
 
+// Contexto global de autenticación
 
 // Definir el tipo del contexto
 interface AuthContextType{
     user: UserData | null;
     loading: boolean;
+    register: (data: RegisterData) => Promise<void>;
     login: (data: LoginData) => Promise<void>;
     logout: () => void;
     isAuthenticated: boolean;
@@ -48,6 +50,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         checkAuth();
     }, []);
 
+    // Función de register
+    const register = async (data: RegisterData) => {
+        try{
+            // 1. Registrar al usuario
+            await apiRegister(data);
+            // 2. Iniciar sesión automáticamente
+            await login({username: data.username, password: data.password});
+        } catch (error){
+            throw error;
+        }
+    }
+
     // Función de login
     const login = async (data: LoginData) => {
         try{
@@ -69,6 +83,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const values = {
         user,
         loading,
+        register,
         login,
         logout,
         isAuthenticated: !!user,
