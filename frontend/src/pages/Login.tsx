@@ -29,8 +29,8 @@ const Login = () => {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4 py-8">
-            <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6 sm:p-8 transition-all">
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 px-2 sm:px-4 py-4 sm:py-8">
+            <div className="w-full max-w-sm sm:max-w-md bg-white rounded-xl shadow-lg p-4 sm:p-8">
                 {/* Logo y título */}
                 <div className="text-center mb-8">
                     <h1 className="text-3xl sm:text-4xl font-bold text-blue-600">💰 MoneyMirror</h1>
@@ -49,7 +49,7 @@ const Login = () => {
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
-                            className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                            className="mt-1 w-full min-w-0 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Ingresa tu usuario"
                             autoComplete="username"
                         />
@@ -65,7 +65,7 @@ const Login = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                            className="mt-1 w-full min-w-0 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Ingresa tu contraseña"
                             autoComplete="current-password"
                         />

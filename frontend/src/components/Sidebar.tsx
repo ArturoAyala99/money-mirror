@@ -1,7 +1,12 @@
+import type React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const Sidebar = () => {
+interface SidebarProps {
+    closeSidebar: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ closeSidebar }) => {
 
     const { logout } = useAuth();
     const navigate = useNavigate();
@@ -9,6 +14,11 @@ const Sidebar = () => {
     const handleLogout = () => {
         logout();
         navigate('/login');
+        if (closeSidebar) closeSidebar();
+    }
+
+    const handleLinkClick = () => {
+        if (closeSidebar) closeSidebar();
     }
 
     const linkClasses = ({ isActive }: { isActive: boolean }) =>
@@ -24,19 +34,19 @@ const Sidebar = () => {
 
             {/* Navegación */}
             <nav className="flex-1 p-4 space-y-1">
-                <NavLink to="/" className={linkClasses} end>
+                <NavLink to="/" className={linkClasses} end onClick={handleLinkClick}>
                     <span>📊</span> Dashboard
                 </NavLink>
 
-                <NavLink to="/accounts" className={linkClasses}> 
+                <NavLink to="/accounts" className={linkClasses} onClick={handleLinkClick}> 
                     <span>🏦</span> Cuentas
                 </NavLink>
 
-                <NavLink to="/transactions" className={linkClasses}>
+                <NavLink to="/transactions" className={linkClasses} onClick={handleLinkClick}>
                     <span>💳</span> Transacciones
                 </NavLink>
 
-                <NavLink to="/goals" className={linkClasses}>
+                <NavLink to="/goals" className={linkClasses} onClick={handleLinkClick}>
                     <span>🎯</span> Metas
                 </NavLink>
             </nav>

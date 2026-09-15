@@ -1,6 +1,6 @@
 import apiClient from './client';
 
-// Servicios de autenticación 
+// Servicios (apis) de autenticación 
 
 // estandarizamos los tipos de datos
 export interface RegisterData{
@@ -22,7 +22,7 @@ export interface UserData{
     last_name: string;
 }
 
-// funciones de autenticación
+// funciones (llamadas a las apis) de autenticación
 export const register = async (data: RegisterData): Promise<UserData> => {
     const response = await apiClient.post('/auth/register/', data);
     return response.data;

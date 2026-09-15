@@ -53,7 +53,8 @@ class AccountViewSet(viewsets.ModelViewSet):
         return Account.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer): # Asignar automáticamente el user al crear una cuenta
-        serializer.save(user=self.request.user) # Asigna el usuario autenticado
+        initial = serializer.validated_data.get('initial_balance', 0) # validated_data:  diccionario con los datos que el serializer ya validó
+        serializer.save(user=self.request.user, current_balance=initial) # Asigna el usuario autenticado y el saldo inicial
 
 '''
 Category APIs:
